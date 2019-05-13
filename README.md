@@ -138,7 +138,7 @@ You need to be registered with handleAuthClick.
 
 ```javascript
     /**
-    * Create calendar event
+    * Delete calendar event
     * @param {string} CalendarId for the event by default use 'primary'.
     * @param {string} EventId id of the event
     * @returns {any} Promise on the event.
