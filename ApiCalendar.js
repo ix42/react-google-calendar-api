@@ -172,7 +172,7 @@ class ApiCalendar {
   /**
    * Delete Calendar event
    * @param {string} calendarId for the event.
-   * @param {string} eventId with start and end dateTime
+   * @param {string} eventId id of the event
    * @returns {any}
    */
   deleteEvent(eventId, calendarId = this.calendar) {
@@ -181,7 +181,23 @@ class ApiCalendar {
       eventId: eventId,
     })
   }
+
+  /**
+   * Update Calendar event
+   * @param {object} event details.
+   * @param {string} eventId id of the event
+   * @param {string} calendarId for the event.
+   * @returns {any}
+   */
+  updateEvent(event, eventId, calendarId = this.calendar) {
+    return this.gapi.client.calendar.events.update({
+      eventId: eventId,
+      calendarId: calendarId,
+      resource: event,
+    })
+  }
 }
+
 let apiCalendar
 try {
   apiCalendar = new ApiCalendar()

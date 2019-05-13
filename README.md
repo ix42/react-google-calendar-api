@@ -146,6 +146,19 @@ You need to be registered with handleAuthClick.
    public deleteEvent({eventId: string, calendarId: string = this.calendar}): any {
 ```
 
+### Update Event:
+
+```javascript
+    /**
+    * Update Calendar event
+    * @param {object} event details.
+    * @param {string} eventId id of the event
+    * @param {string} calendarId for the event.
+    * @returns {any}
+    */
+   public updateEvent(event: object, eventId: string, calendarId: string = this.calendar): any {
+```
+
 #### Example
 
 ```javascript
