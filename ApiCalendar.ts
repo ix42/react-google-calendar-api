@@ -14,6 +14,7 @@ class ApiCalendar {
       this.handleAuthClick = this.handleAuthClick.bind(this)
       this.createEvent = this.createEvent.bind(this)
       this.deleteEvent = this.deleteEvent.bind(this)
+      this.updateEvent = this.updateEvent.bind(this)
       this.listUpcomingEvents = this.listUpcomingEvents.bind(this)
       this.createEventFromNow = this.createEventFromNow.bind(this)
       this.listenSign = this.listenSign.bind(this)
