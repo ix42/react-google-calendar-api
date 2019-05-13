@@ -193,7 +193,7 @@ class ApiCalendar {
    * @returns {any}
    */
   public deleteEvent(eventId: string, calendarId: string = this.calendar): any {
-    return this.gapi.client.calendar.events.insert({
+    return this.gapi.client.calendar.events.delete({
       calendarId: calendarId,
       eventId: eventId,
     })
