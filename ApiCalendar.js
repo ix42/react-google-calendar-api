@@ -1,4 +1,4 @@
-const Config = require("../../../apiGoogleconfig.json");
+const Config = require('../../../apiGoogleconfig.json');
 class ApiCalendar {
     constructor() {
         this.sign = false;
@@ -34,7 +34,8 @@ class ApiCalendar {
      */
     initClient() {
         this.gapi = window['gapi'];
-        this.gapi.client.init(Config)
+        this.gapi.client
+            .init(Config)
             .then(() => {
             // Listen for sign-in state changes.
             this.gapi.auth2.getAuthInstance().isSignedIn.listen(this.updateSigninStatus);
@@ -54,8 +55,8 @@ class ApiCalendar {
      */
     handleClientLoad() {
         this.gapi = window['gapi'];
-        const script = document.createElement("script");
-        script.src = "https://apis.google.com/js/api.js";
+        const script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/api.js';
         document.body.appendChild(script);
         script.onload = () => {
             window['gapi'].load('client:auth2', this.initClient);
@@ -69,7 +70,7 @@ class ApiCalendar {
             this.gapi.auth2.getAuthInstance().signIn();
         }
         else {
-            console.log("Error: this.gapi not loaded");
+            console.log('Error: this.gapi not loaded');
         }
     }
     /**
@@ -88,7 +89,7 @@ class ApiCalendar {
             this.gapi.auth2.getAuthInstance().isSignedIn.listen(callback);
         }
         else {
-            console.log("Error: this.gapi not loaded");
+            console.log('Error: this.gapi not loaded');
         }
     }
     /**
@@ -111,7 +112,7 @@ class ApiCalendar {
             this.gapi.auth2.getAuthInstance().signOut();
         }
         else {
-            console.log("Error: this.gapi not loaded");
+            console.log('Error: this.gapi not loaded');
         }
     }
     /**
@@ -123,16 +124,16 @@ class ApiCalendar {
     listUpcomingEvents(maxResults, calendarId = this.calendar) {
         if (this.gapi) {
             return this.gapi.client.calendar.events.list({
-                'calendarId': calendarId,
-                'timeMin': (new Date()).toISOString(),
-                'showDeleted': false,
-                'singleEvents': true,
-                'maxResults': maxResults,
-                'orderBy': 'startTime'
+                calendarId: calendarId,
+                timeMin: new Date().toISOString(),
+                showDeleted: false,
+                singleEvents: true,
+                maxResults: maxResults,
+                orderBy: 'startTime',
             });
         }
         else {
-            console.log("Error: this.gapi not loaded");
+            console.log('Error: this.gapi not loaded');
             return false;
         }
     }
@@ -149,17 +150,17 @@ class ApiCalendar {
             summary,
             description,
             start: {
-                dateTime: (new Date()).toISOString(),
-                timeZone: "Europe/Paris",
+                dateTime: new Date().toISOString(),
+                timeZone: 'Europe/Paris',
             },
             end: {
-                dateTime: (new Date(new Date().getTime() + time * 60000)),
-                timeZone: "Europe/Paris",
-            }
+                dateTime: new Date(new Date().getTime() + time * 60000),
+                timeZone: 'Europe/Paris',
+            },
         };
         return this.gapi.client.calendar.events.insert({
-            'calendarId': calendarId,
-            'resource': event,
+            calendarId: calendarId,
+            resource: event,
         });
     }
     /**
@@ -170,8 +171,20 @@ class ApiCalendar {
      */
     createEvent(event, calendarId = this.calendar) {
         return this.gapi.client.calendar.events.insert({
-            'calendarId': calendarId,
-            'resource': event,
+            calendarId: calendarId,
+            resource: event,
+        });
+    }
+    /**
+     * Delete Calendar event
+     * @param {string} calendarId for the event.
+     * @param {string} eventId with start and end dateTime
+     * @returns {any}
+     */
+    deleteEvent(eventId, calendarId = this.calendar) {
+        return this.gapi.client.calendar.events.insert({
+            calendarId: calendarId,
+            eventId: eventId,
         });
     }
 }
