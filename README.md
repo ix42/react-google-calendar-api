@@ -20,6 +20,7 @@ import ApiCalendar from 'react-google-calendar-api';
 ```
 
 ### Typescript Import
+
 ```
 import ApiCalendar from 'react-google-calendar-api/ApiCalendar';
 ```
@@ -61,13 +62,13 @@ https://console.developers.google.com/flows/enableapi?apiid=calendar.
 ```javascript
   import React, {ReactNode, SyntheticEvent} from 'react';
   import ApiCalendar from 'react-google-calendar-api';
-  
+
   export default class DoubleButton extends React.Component {
       constructor(props) {
         super(props);
         this.handleItemClick = this.handleItemClick.bind(this);
       }
-      
+
       public handleItemClick(event: SyntheticEvent<any>, name: string): void {
         if (name === 'sign-in') {
           ApiCalendar.handleAuthClick();
@@ -92,7 +93,7 @@ https://console.developers.google.com/flows/enableapi?apiid=calendar.
       }
   }
 ```
-    
+
 ### setCalendar:
 
 ```javascript
@@ -109,15 +110,16 @@ You need to be registered with handleAuthClick.
 
 ### Create Event:
 
- ```javascript
-     /**
-     * Create calendar event
-     * @param {string} CalendarId for the event by default use 'primary'.
-     * @param {object} Event with start and end dateTime
-     * @returns {any} Promise on the event.
-     */
-    public createEvent(event: object, calendarId: string = this.calendar): any {
- ```
+```javascript
+    /**
+    * Create calendar event
+    * @param {string} CalendarId for the event by default use 'primary'.
+    * @param {object} Event with start and end dateTime
+    * @returns {any} Promise on the event.
+    */
+   public createEvent(event: object, calendarId: string = this.calendar): any {
+```
+
 ### Create Event From Now:
 
 ```javascript
@@ -128,26 +130,39 @@ You need to be registered with handleAuthClick.
      * @param {string} Description of the event (optional)
      * @param {string} CalendarId by default calendar set by setCalendar.
      * @returns {any} Promise on the event.
-     */ 
+     */
     public createEventFromNow({time, summary, description = ''}: any, calendarId: string = this.calendar): any
- ```
+```
+
+### Delete Event:
+
+```javascript
+    /**
+    * Create calendar event
+    * @param {string} CalendarId for the event by default use 'primary'.
+    * @param {string} EventId id of the event
+    * @returns {any} Promise on the event.
+    */
+   public deleteEvent({eventId: string, calendarId: string = this.calendar}): any {
+```
+
 #### Example
 
 ```javascript
-  import ApiCalendar from 'react-google-calendar-api';
+import ApiCalendar from 'react-google-calendar-api'
 
-  const eventFromNow: object = {
-      summary: "Poc Dev From Now",
-      time: 480,
-  };
+const eventFromNow: object = {
+  summary: 'Poc Dev From Now',
+  time: 480,
+}
 
-  ApiCalendar.createEventFromNow(eventFromNow)
-    .then((result: object) => {
-      console.log(result);
-        })
-     .catch((error: any) => {
-       console.log(error);
-        });
+ApiCalendar.createEventFromNow(eventFromNow)
+  .then((result: object) => {
+    console.log(result)
+  })
+  .catch((error: any) => {
+    console.log(error)
+  })
 ```
 
 ### List All Upcoming Events:
@@ -165,13 +180,12 @@ You need to be registered with handleAuthClick.
 #### Example
 
 ```javascript
-  import ApiCalendar from 'react-google-calendar-api';
-  
-  if (ApiCalendar.sign)
-    ApiCalendar.listUpcomingEvents(10)
-      .then(({result}: any) => {
-        console.log(result.items);
-      });
+import ApiCalendar from 'react-google-calendar-api'
+
+if (ApiCalendar.sign)
+  ApiCalendar.listUpcomingEvents(10).then(({ result }: any) => {
+    console.log(result.items)
+  })
 ```
 
 ## Utils
@@ -201,7 +215,7 @@ You need to be registered with handleAuthClick.
 ```javascript
     import React, {ReactNode} from 'react';
     import ApiCalendar from 'react-google-calendar-api';
-    
+
     export default class StatusSign extends React.Component<any, any> {
         constructor(props) {
             super(props);
@@ -219,7 +233,7 @@ You need to be registered with handleAuthClick.
                 sign
             })
         }
-        
+
         render(): ReactNode {
             return (
                 <div>{this.state.sign}</div>
